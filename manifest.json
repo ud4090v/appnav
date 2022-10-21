@@ -1,0 +1,97 @@
+{ "sap.app": {
+		"_version": "1.1.0",
+		"id": "ula.mes.order",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.1.1" 
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "ach",
+		"dataSources": {
+		
+		}
+	},
+	"sap.ui5": {
+        "rootView": {
+			"viewName": "ula.mes.order.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "myApp"
+		},
+		"dependencies": {
+			"libs": {
+				"sap.ui.core": {
+				},
+				"sap.m": {
+				},
+				"sap.f": {
+				}
+			}
+		},
+		"services": {
+			"ShellUIService": {
+				"factoryName": "sap.ushell.ui5service.ShellUIService"
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ula.mes.order.i18n.i18n"
+				}
+			},
+			"viewModel" : {
+			  "type": "sap.ui.model.json.JSONModel"
+			}			
+		},
+		"resources": {
+			"js": [
+				{
+					"uri": "js/mustache.min.js"
+				}
+			],
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+	
+		"config": {
+			"fullWidth": true,
+			"resourceBundle": "i18n/i18n.properties",
+			"serviceConfig": {
+				"DEF":{"name": "ZMES_OM_SRV", "serviceUrl": "/sap/opu/odata/sap/ZMES_OM_SRV/"}, 
+				"MAINT":{"name": "ZMES_OM_SRV", "serviceUrl": "/sap/opu/odata/sap/ZMES_OM_SRV/"}, 
+				"EXEC":{"name": "ZMES_OM_EXEC_SRV", "serviceUrl": "/sap/opu/odata/sap/ZMES_OM_EXEC_SRV/"},
+				"AUTH":{"name": "ZMES_OM_AUTH_SRV", "serviceUrl": "/sap/opu/odata/sap/ZMES_OM_AUTH_SRV/"}
+				}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ula.mes.order.view",
+				"controlId": "myApp",
+				"transition": "slide",
+				"bypassed": {
+				},
+				"async": true
+			},
+			"routes":[
+				{
+					"pattern":"",
+					"name":"resultTable",
+					"target":["resultTable"]
+				}
+			],
+			"targets": {
+				"resultTable": {
+					"viewName":"ResultTable",
+					"controlAggregation":"pages"	
+				}		
+			}
+		}
+	}
+}
