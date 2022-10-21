@@ -1,0 +1,4 @@
+<mvc:View id="myApp" xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" controllerName="ula.mes.order.controller.App" height="100%">
+<App id="myApp" busy="{app>/busy}" busyIndicatorDelay="{app>/delay}">
+</App>
+</mvc:View>

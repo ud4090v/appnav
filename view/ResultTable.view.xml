@@ -1,0 +1,85 @@
+<core:View
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:m="sap.m"
+xmlns:f="sap.f"
+xmlns:l="sap.ui.layout"
+xmlns:form="sap.ui.layout.form"
+xmlns:uxap="sap.uxap"
+xmlns:fb="sap.ui.comp.filterbar"
+controllerName="ula.mes.order.controller.ResultTable" xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page title="{i18n>AppTitle}" showHeader="false" class="sapUiSizeCompact">
+		<content>
+<!-- 						<Button text="Authenticate" press="onPressAuth" /> -->
+			<l:VerticalLayout width="100%">
+				<fb:FilterBar id="FilterBar" clear="onReset" reset="onReset" search="applyFilter" showClearButton="true" showClearOnFB="true" showGoOnFB="true" filterBarExpanded="true">
+					<fb:filterItems>
+						<fb:FilterItem name="Material" label="Part Number ">
+							<fb:control>
+								<Input id="Material" value="{FilterModel>/PlanSrc}" submit="applyFilter"/>
+							</fb:control>
+						</fb:FilterItem>
+
+
+						<fb:FilterItem name="Order" label="Order #">
+							<fb:control>
+								<Input id="OrderSrc" value="{FilterModel>/OrderSrc}" submit="applyFilter"/>
+							</fb:control>
+						</fb:FilterItem>
+
+					</fb:filterItems>
+				</fb:FilterBar>
+
+				<Tokenizer id="Tokenizer" tokens="{FilterModelHistoryList>/}" editable="false" class="sapUiSmallMarginBottom">
+					<Token text="{FilterModelHistoryList>PlanSrc} {FilterModelHistoryList>OrderSrc}" press="loadHistory"/>
+				</Tokenizer>
+
+				<Table 	id="ordersTable" 
+						inset="false" 
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						items="{backend>/OrderSet}" width="auto">
+						<headerToolbar>
+							<OverflowToolbar>
+								<ToolbarSpacer/>
+								<ToggleButton tooltip="Favourites" icon="sap-icon://favorite-list" press="onFavList" id ="favList"/>
+								<Button tooltip="Sort" icon="sap-icon://sort" press="handleSortButtonPressed"/>
+							</OverflowToolbar>
+						</headerToolbar>
+					<columns>
+						<Column><Text text="Work Order No" /></Column>
+						<Column width="24rem"><Text text="Part Number " /></Column>
+						<Column><Text text="Title" /></Column>
+						<Column><Text text="Order Revision" /></Column>
+						<Column><Text text="Revision Status" /></Column>
+						<Column><Text text="Model/Unit" /></Column>
+						<Column><Text text="Mission" /></Column>
+						<Column><Text text="Site" /></Column>
+						<Column><Text text="Order Sub Type" /></Column>
+						<Column><Text text="Deviation Type" /></Column>
+					</columns>
+					<items>
+
+						<ColumnListItem type="Navigation" press="onListItemPress">
+							<cells>
+								<ObjectIdentifier 	title="{backend>OrderNo}" />
+								<ObjectIdentifier 	title="{backend>MaterialExternal}" />
+								<ObjectIdentifier 	title="{backend>MaterialDescription}" />
+								<ObjectIdentifier 	title="{backend>OrderRevNo}" />
+								<ObjectIdentifier 	title="{backend>Revstat}" />
+								<ObjectIdentifier 	title="{backend>Model}/{backend>Unit}" />
+								<ObjectIdentifier 	title="{backend>Mission}" />
+								<ObjectIdentifier 	title="{backend>Plant}" />
+								<ObjectIdentifier 	title="{backend>PlanSubtype}" />
+								<ObjectIdentifier 	title="{backend>DevType}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>					
+			</l:VerticalLayout>
+		</content>
+	</Page>
+</core:View>
